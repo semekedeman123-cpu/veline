@@ -1,0 +1,99 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Velin | One Tap, Endless Connections{% endblock %}
+
+{% block content %}
+  <section class="hero shell" data-cascade>
+    <div class="hero__copy" data-reveal>
+      <p class="eyebrow">Premium NFC networking</p>
+      <h1>One Tap, Endless <span>Connections</span></h1>
+      <p class="hero__lede">Velin turns a premium physical card into a digital profile you can share instantly and update anytime.</p>
+      <div class="hero__actions">
+        <a href="{% if request.user.is_authenticated %}{% url 'profile-edit' %}{% else %}{% url 'signup' %}{% endif %}" class="button button--primary button--large">Create Profile</a>
+        <a href="{% url 'products' %}" class="button button--ghost button--large">Explore Products</a>
+      </div>
+    </div>
+
+    <div class="hero__visual" data-reveal>
+      <div class="hero-device hero-device--black">
+        <img src="{% static 'images/velin/black-plastic-velin-card.jpg' %}" alt="Velin black plastic NFC card">
+      </div>
+      <div class="hero-device hero-device--metal">
+        <img src="{% static 'images/velin/metal-velin-card.jpg' %}" alt="Velin metal NFC card">
+      </div>
+      <div class="hero-device hero-device--wood">
+        <img src="{% static 'images/velin/wood-velin-card.jpg' %}" alt="Velin wooden NFC card">
+      </div>
+    </div>
+  </section>
+
+  <section class="section shell why-section" data-cascade>
+    <div class="section-heading section-heading--compact" data-reveal>
+      <h2>Why Choose Velin?</h2>
+      <p>Built to make introductions faster, cleaner, and easier to keep current.</p>
+    </div>
+    <div class="choose-grid">
+      <article class="choose-logo panel" data-reveal>
+        <img src="{% static 'images/velin/velin-gradient-logo.png' %}" alt="Velin gradient logo">
+      </article>
+      <div class="choose-stack">
+        {% for item in why_choose %}
+          <article class="choose-line panel" data-reveal>
+            <h3>{{ item.title }}</h3>
+            <p>{{ item.copy }}</p>
+          </article>
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+
+  <section class="section shell" data-cascade>
+    <div class="section-heading section-heading--products" data-reveal>
+      <div>
+        <p class="eyebrow">Products</p>
+        <h2>Choose the Velin card that fits your brand.</h2>
+        <p>Premium finishes, clean presentation, and a digital profile that stays ready to share.</p>
+      </div>
+      <a href="{% url 'products' %}" class="button button--primary button--large">Explore Products</a>
+    </div>
+
+    <div class="catalog-grid catalog-grid--home">
+      {% for item in featured_products %}
+        {% include 'core/partials/product_card.html' with product=item %}
+      {% endfor %}
+    </div>
+  </section>
+
+  <section class="section shell split-section split-section--balanced" data-cascade>
+    <div class="split-section__left split-section__left--narrow">
+      <div class="section-heading split-section__copy" data-reveal>
+        <p class="eyebrow">How It Works</p>
+        <h2>Your profile, ready in four steps.</h2>
+        <p>Choose your card, set up your profile, and share a polished digital identity with a single tap.</p>
+      </div>
+    </div>
+    <div class="split-section__right">
+      <div class="timeline timeline--grid">
+        {% for item in how_it_works %}
+          <article class="timeline-card" data-reveal>
+            <span class="timeline-card__step">{{ item.step }}</span>
+            <h3>{{ item.title }}</h3>
+            <p>{{ item.copy }}</p>
+          </article>
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+
+  <section class="section shell cta-band" data-reveal>
+    <div>
+      <p class="eyebrow">Set Up Your Profile</p>
+      <h2>Build your profile, then let the card introduce you.</h2>
+    </div>
+    <div class="cta-band__actions">
+      <a href="{% if request.user.is_authenticated %}{% url 'profile-edit' %}{% else %}{% url 'signup' %}{% endif %}" class="button button--primary button--large">Set Up Profile</a>
+      <a href="{% url 'products' %}" class="button button--ghost button--large">View Products</a>
+    </div>
+  </section>
+{% endblock %}

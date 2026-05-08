@@ -1,0 +1,93 @@
+{% extends 'base.html' %}
+
+{% block title %}Velin · Dashboard{% endblock %}
+
+{% block content %}
+  <section class="dashboard shell">
+    <div class="section-heading section-heading--compact" data-reveal>
+      <p class="eyebrow">Dashboard</p>
+      <h1>Your Velin dashboard.</h1>
+      <p>Keep your profile current, publish when you're ready, and keep everything simple to manage.</p>
+    </div>
+
+    {% if not profile.email_verified %}
+      <article class="banner-card" data-reveal>
+        <div>
+          <strong>Email verification required</strong>
+          <p>Verify your email before you publish your public profile.</p>
+        </div>
+        <form method="post" action="{% url 'resend-verification' %}">
+          {% csrf_token %}
+          <button type="submit" class="button button--primary">Resend Verification</button>
+        </form>
+      </article>
+    {% endif %}
+
+    <div class="dashboard-grid dashboard-grid--calm">
+      <article class="panel panel--dashboard" data-reveal>
+        <p class="eyebrow">Profile Status</p>
+        <h2>{{ profile.display_name|default:nav_display_name }}</h2>
+        <div class="status-list">
+          <span class="status-pill {% if profile.email_verified %}is-live{% endif %}">{% if profile.email_verified %}Email Verified{% else %}Email Unverified{% endif %}</span>
+          <span class="status-pill {% if profile.is_published %}is-live{% endif %}">{% if profile.is_published %}Public{% else %}Draft{% endif %}</span>
+        </div>
+        <div class="panel-actions">
+          <a href="{% url 'profile-edit' %}" class="button button--ghost">Edit Profile</a>
+          <form method="post" action="{% url 'profile-publish' %}">
+            {% csrf_token %}
+            {% if profile.is_published %}
+              <input type="hidden" name="action" value="unpublish">
+              <button type="submit" class="button button--ghost">Unpublish</button>
+            {% else %}
+              <button type="submit" class="button button--primary">Publish Profile</button>
+            {% endif %}
+          </form>
+        </div>
+      </article>
+
+      <article class="panel panel--dashboard panel--subtle" data-reveal>
+        <p class="eyebrow">Share Link</p>
+        <p class="dashboard-note">Keep your public page ready whenever you want to share it.</p>
+        <div class="copy-field copy-field--compact">
+          <input id="public-link-input" type="text" value="{{ public_url }}" readonly>
+          <button type="button" class="button button--ghost" data-copy-target="public-link-input">Copy</button>
+        </div>
+      </article>
+
+      <article class="panel panel--dashboard" data-reveal>
+        <p class="eyebrow">Getting Started</p>
+        <h2>What to do next.</h2>
+        <ul class="mini-list">
+          <li>Finish your profile details</li>
+          <li>Verify your email</li>
+          <li>Publish when it feels ready</li>
+          <li>Share your public page when you want to</li>
+        </ul>
+      </article>
+
+      <article class="panel panel--dashboard" data-reveal>
+        <p class="eyebrow">Data Controls</p>
+        <h2>Keep everything in your hands.</h2>
+        <div class="stack-list">
+          <a href="{% url 'profile-export' %}" class="button button--ghost">Export My Data</a>
+          <a href="{% url 'delete-request' %}" class="button button--ghost">Request Account Deletion</a>
+        </div>
+        {% if deletion_request %}
+          <p class="muted-copy">Deletion request status: <strong>{{ deletion_request.get_status_display }}</strong></p>
+        {% endif %}
+      </article>
+
+      <article class="panel panel--dashboard panel--full" data-reveal>
+        <p class="eyebrow">Terms & Conditions</p>
+        <div class="consent-grid consent-grid--simple">
+          {% for consent in consents %}
+            <div class="consent-chip">
+              <span>{{ consent.get_kind_display }}</span>
+              <strong>{% if consent.accepted %}Accepted{% else %}Declined{% endif %}</strong>
+            </div>
+          {% endfor %}
+        </div>
+      </article>
+    </div>
+  </section>
+{% endblock %}

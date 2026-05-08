@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block title %}Velin · Delete Request{% endblock %}
+
+{% block content %}
+  <section class="policy shell">
+    <article class="panel panel--narrow" data-reveal>
+      <p class="eyebrow">Delete Request</p>
+      <h1>Request removal of your account and hosted profile.</h1>
+      <p>This creates a staff-visible request in the admin so the account can be reviewed and removed safely.</p>
+      <form method="post" class="form-stack">
+        {% csrf_token %}
+        <div class="field">
+          <label for="{{ form.reason.id_for_label }}">Reason</label>
+          {{ form.reason }}
+          {% if form.reason.errors %}<div class="field-error">{{ form.reason.errors|striptags }}</div>{% endif %}
+        </div>
+        <button type="submit" class="button button--primary">Submit Request</button>
+      </form>
+    </article>
+  </section>
+{% endblock %}

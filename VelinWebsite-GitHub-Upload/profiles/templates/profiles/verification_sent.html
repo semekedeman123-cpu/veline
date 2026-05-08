@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block title %}Velin · Verify Your Email{% endblock %}
+
+{% block content %}
+  <section class="policy shell">
+    <article class="panel panel--center" data-reveal>
+      <p class="eyebrow">Verification Email Sent</p>
+      <h1>Check your inbox before you publish.</h1>
+      <p>Velin sent a verification link to your email address. Once you open it, your profile can go live.</p>
+      <a href="{% url 'dashboard' %}" class="button button--primary">Open Dashboard</a>
+    </article>
+  </section>
+{% endblock %}

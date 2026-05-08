@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block title %}Velin | Terms{% endblock %}
+
+{% block content %}
+  <section class="policy shell">
+    <div class="section-heading" data-reveal>
+      <p class="eyebrow">Terms Of Service</p>
+      <h1>One permanent link, managed responsibly.</h1>
+      <p>Velin accounts are intended for legitimate professional identity sharing. Users are responsible for the content they publish and for programming the correct generated link onto each NFC card.</p>
+    </div>
+
+    <div class="policy-grid">
+      <article class="panel" data-reveal>
+        <h2>Account Responsibility</h2>
+        <p>Each account owns one profile in this first version. Keep credentials secure and use a real email address that you can verify.</p>
+      </article>
+      <article class="panel" data-reveal>
+        <h2>Publishing Rules</h2>
+        <p>Profiles cannot be published until the email address is verified. The owner controls whether the profile is public or private.</p>
+      </article>
+      <article class="panel" data-reveal>
+        <h2>NFC Link Handling</h2>
+        <p>The generated public URL is intended to be the stable destination written to the card. Velin keeps that URL permanent so later edits do not break the tap experience.</p>
+      </article>
+      <article class="panel" data-reveal>
+        <h2>Operational Changes</h2>
+        <p>Velin may update pricing, product availability, or platform features over time while keeping shared profile links stable for active customers.</p>
+      </article>
+    </div>
+  </section>
+{% endblock %}

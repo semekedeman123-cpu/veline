@@ -1,0 +1,10 @@
+Hi {{ user.profile.full_name|default:user.email }},
+
+Welcome to Velin.
+
+Verify your email to unlock public profile publishing:
+{{ verification_url }}
+
+Once verified, you can publish your profile and use the generated public link as the permanent destination written to your NFC card.
+
+Velin

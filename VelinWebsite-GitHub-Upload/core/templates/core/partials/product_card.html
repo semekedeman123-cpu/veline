@@ -1,0 +1,32 @@
+{% load static %}
+<article class="catalog-card" data-reveal>
+  <div class="catalog-card__media">
+    {% if product.availability_status == 'coming_soon' %}
+      <span class="catalog-card__badge catalog-card__badge--soon">Coming Soon</span>
+    {% else %}
+      <span class="catalog-card__badge">In Stock</span>
+    {% endif %}
+    {% if product.primary_image %}
+      <img src="{{ product.primary_image.url }}" alt="{{ product.name }}">
+    {% elif product.static_asset %}
+      <img src="{% static product.static_asset %}" alt="{{ product.name }}">
+    {% endif %}
+  </div>
+  <div class="catalog-card__body">
+    <p class="catalog-card__meta">{{ product.material_label }}</p>
+    <h3>{{ product.name }}</h3>
+    <p>{{ product.description }}</p>
+    <div class="catalog-card__foot">
+      <strong class="catalog-card__price">EUR {{ product.price_amount }}</strong>
+      {% if product.availability_status == 'coming_soon' %}
+        <span class="button button--ghost button--disabled">Unavailable</span>
+      {% else %}
+        <form method="post" action="{% url 'cart-add' product.slug %}">
+          {% csrf_token %}
+          <input type="hidden" name="next" value="{% url 'cart' %}">
+          <button type="submit" class="button button--primary">Add To Cart</button>
+        </form>
+      {% endif %}
+    </div>
+  </div>
+</article>

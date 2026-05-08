@@ -1,0 +1,23 @@
+{
+  "source": "https://velin.base44.app/",
+  "status": "partial_success",
+  "saved_images": [
+    {
+      "file": "velin-logo-live-transparent.png",
+      "usage": "Live transparent logo variant kept as reference."
+    },
+    {
+      "file": "velin-product-shot-standard-metal.png",
+      "usage": "Live product shot that appears to be used for both Standard Card and Metal Card in the current Base44 bundle."
+    },
+    {
+      "file": "velin-product-shot-wood.png",
+      "usage": "Live wood product shot kept as reference."
+    },
+    {
+      "file": "velin-product-shot-custom-design.png",
+      "usage": "Used as the restored custom-design product image in the local project."
+    }
+  ],
+  "ring_image_found": false
+}

@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block title %}Velin | Privacy Policy{% endblock %}
+
+{% block content %}
+  <section class="policy shell">
+    <div class="section-heading" data-reveal>
+      <p class="eyebrow">Privacy Policy</p>
+      <h1>Privacy designed for public profiles.</h1>
+      <p>Velin only publishes information that the profile owner chooses to make public. Accounts stay private by default until the owner verifies their email and explicitly publishes the profile.</p>
+    </div>
+
+    <div class="policy-grid">
+      <article class="panel" data-reveal>
+        <h2>What We Collect</h2>
+        <p>We store the account email, profile details entered by the user, consent timestamps, and any uploaded profile media such as photos or business pitch files.</p>
+      </article>
+      <article class="panel" data-reveal>
+        <h2>Why We Collect It</h2>
+        <p>The data exists so Velin can host the public profile behind the NFC card, manage secure account access, and give the owner control over their own published identity.</p>
+      </article>
+      <article class="panel" data-reveal>
+        <h2>User Control</h2>
+        <p>Users can export their stored profile data, unpublish their public profile, or submit a deletion request from the dashboard.</p>
+      </article>
+      <article class="panel" data-reveal>
+        <h2>Profile Visibility</h2>
+        <p>Public profile pages only show the details a user chooses to share, and that visibility can be updated at any time from the account dashboard.</p>
+      </article>
+    </div>
+  </section>
+{% endblock %}

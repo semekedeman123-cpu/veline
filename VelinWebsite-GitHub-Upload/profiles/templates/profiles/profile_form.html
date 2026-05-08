@@ -1,0 +1,161 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Velin · Profile Editor{% endblock %}
+
+{% block content %}
+  <section class="dashboard shell">
+    <div class="section-heading section-heading--compact section-heading--editor" data-reveal>
+      <p class="eyebrow">Profile Builder</p>
+      <h1>Publish your profile, then let the card introduce you.</h1>
+      <p>Save your profile anytime and keep everything ready for the moment you want to go live.</p>
+    </div>
+
+    <div class="editor-layout editor-layout--refined">
+      <form method="post" enctype="multipart/form-data" class="editor-form panel" data-reveal>
+        {% csrf_token %}
+        {% if form.non_field_errors %}<div class="field-error">{{ form.non_field_errors|striptags }}</div>{% endif %}
+
+        <div class="form-section">
+          <h2>Profile</h2>
+          <div class="field-grid field-grid--identity">
+            <div class="field field--upload field--full">
+              <label for="{{ form.profile_photo.id_for_label }}">Profile Photo</label>
+              <div class="upload-shell">
+                <span class="upload-trigger">Choose file</span>
+                <span class="upload-name" data-file-name>{{ profile.profile_photo.name|default:"No file chosen" }}</span>
+                {{ form.profile_photo }}
+              </div>
+              <p class="field-help">JPG, PNG or GIF. Max 5MB.</p>
+              {% if form.profile_photo.errors %}<div class="field-error">{{ form.profile_photo.errors|striptags }}</div>{% endif %}
+            </div>
+            <div class="field">
+              <label for="{{ form.full_name.id_for_label }}">Full Name</label>
+              {{ form.full_name }}
+            </div>
+            <div class="field">
+              <label for="{{ form.email.id_for_label }}">Email</label>
+              {{ form.email }}
+            </div>
+            <div class="field">
+              <label for="{{ form.business_name.id_for_label }}">Business Name</label>
+              {{ form.business_name }}
+            </div>
+            <div class="field">
+              <label for="{{ form.position_title.id_for_label }}">Position / Title</label>
+              {{ form.position_title }}
+            </div>
+            <div class="field field--full">
+              <label for="{{ form.phone_number.id_for_label }}">Phone Number</label>
+              {{ form.phone_number }}
+            </div>
+            <div class="field field--full">
+              <label for="{{ form.bio.id_for_label }}">Bio</label>
+              {{ form.bio }}
+            </div>
+          </div>
+        </div>
+
+        <div class="form-section">
+          <h2>Social Links</h2>
+          <div class="social-field-grid">
+            <div class="social-field">
+              <span class="social-field__icon"><img src="{% static 'images/social/website.png' %}" alt=""></span>
+              <div class="social-field__input">
+                <label for="{{ form.website_url.id_for_label }}">Website</label>
+                {{ form.website_url }}
+              </div>
+            </div>
+            <div class="social-field">
+              <span class="social-field__icon"><img src="{% static 'images/social/instagram.png' %}" alt=""></span>
+              <div class="social-field__input">
+                <label for="{{ form.instagram_url.id_for_label }}">Instagram</label>
+                {{ form.instagram_url }}
+              </div>
+            </div>
+            <div class="social-field">
+              <span class="social-field__icon"><img src="{% static 'images/social/linkedin.png' %}" alt=""></span>
+              <div class="social-field__input">
+                <label for="{{ form.linkedin_url.id_for_label }}">LinkedIn</label>
+                {{ form.linkedin_url }}
+              </div>
+            </div>
+            <div class="social-field">
+              <span class="social-field__icon"><img src="{% static 'images/social/twitter.png' %}" alt=""></span>
+              <div class="social-field__input">
+                <label for="{{ form.twitter_url.id_for_label }}">Twitter</label>
+                {{ form.twitter_url }}
+              </div>
+            </div>
+            <div class="social-field">
+              <span class="social-field__icon"><img src="{% static 'images/social/facebook.png' %}" alt=""></span>
+              <div class="social-field__input">
+                <label for="{{ form.facebook_url.id_for_label }}">Facebook</label>
+                {{ form.facebook_url }}
+              </div>
+            </div>
+            <div class="social-field">
+              <span class="social-field__icon"><img src="{% static 'images/social/youtube.png' %}" alt=""></span>
+              <div class="social-field__input">
+                <label for="{{ form.youtube_url.id_for_label }}">YouTube</label>
+                {{ form.youtube_url }}
+              </div>
+            </div>
+            <div class="social-field social-field--wide">
+              <span class="social-field__icon"><img src="{% static 'images/social/tiktok.png' %}" alt=""></span>
+              <div class="social-field__input">
+                <label for="{{ form.tiktok_url.id_for_label }}">TikTok</label>
+                {{ form.tiktok_url }}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-section">
+          <h2>Business Pitch</h2>
+          <div class="field field--upload field--full">
+            <label for="{{ form.pitch_media.id_for_label }}">Upload Pitch</label>
+            <div class="upload-shell">
+              <span class="upload-trigger">Choose file</span>
+              <span class="upload-name" data-file-name>{{ profile.pitch_media.name|default:"No file chosen" }}</span>
+              {{ form.pitch_media }}
+            </div>
+            <p class="field-help">MP3, MP4, WAV, MOV, M4A or WEBM. Max 50MB.</p>
+            {% if form.pitch_media.errors %}<div class="field-error">{{ form.pitch_media.errors|striptags }}</div>{% endif %}
+          </div>
+        </div>
+
+        <div class="form-actions">
+          <button type="submit" class="button button--primary button--large">Save Profile</button>
+          <a href="{% url 'dashboard' %}" class="button button--ghost button--large">Back To Dashboard</a>
+        </div>
+      </form>
+
+      <aside class="editor-preview panel" data-reveal>
+        <p class="eyebrow">Live Preview</p>
+        <h2>Public profile card</h2>
+        <div class="preview-card">
+          <div class="preview-card__avatar {% if not profile.profile_photo %}preview-card__avatar--fallback{% endif %}">
+            {% if profile.profile_photo %}
+              <img src="{{ profile.profile_photo.url }}" alt="{{ profile.full_name }}">
+            {% else %}
+              <img src="{% static 'images/velin/velin-gradient-logo.png' %}" alt="Velin">
+            {% endif %}
+          </div>
+          <strong data-preview-text="full_name" data-fallback="Your Name">{{ profile.display_name|default:'Your Name' }}</strong>
+          <span data-preview-text="position_title" data-fallback="Your title">{{ profile.position_title|default:'Your title' }}</span>
+          <span data-preview-text="business_name" data-fallback="Your business">{{ profile.business_name|default:'Your business' }}</span>
+          <p data-preview-text="bio" data-fallback="A short bio will appear here once you save your profile details.">{{ profile.bio|default:'A short bio will appear here once you save your profile details.' }}</p>
+        </div>
+        <div class="copy-field copy-field--compact">
+          <input id="editor-public-link" type="text" value="{{ public_url }}" readonly>
+          <button type="button" class="button button--ghost" data-copy-target="editor-public-link">Copy</button>
+        </div>
+        <div class="status-list">
+          <span class="status-pill {% if profile.email_verified %}is-live{% endif %}">{% if profile.email_verified %}Verified{% else %}Awaiting verification{% endif %}</span>
+          <span class="status-pill {% if profile.is_published %}is-live{% endif %}">{% if profile.is_published %}Public{% else %}Draft{% endif %}</span>
+        </div>
+      </aside>
+    </div>
+  </section>
+{% endblock %}

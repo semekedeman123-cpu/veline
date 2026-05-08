@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{{ profile.full_name|default:profile.business_name }} | Velin{% endblock %}
+
+{% block content %}
+  <section class="public-profile shell">
+    <article class="public-card" data-reveal>
+      <div class="public-card__brand">
+        <img src="{% static 'images/velin/velin-gradient-logo.png' %}" alt="Velin">
+        <span>One Tap, Endless Connections</span>
+      </div>
+
+      <div class="public-card__identity">
+        <div class="public-card__avatar {% if not profile.profile_photo %}public-card__avatar--fallback{% endif %}">
+          {% if profile.profile_photo %}
+            <img src="{{ profile.profile_photo.url }}" alt="{{ profile.full_name }}">
+          {% else %}
+            <img src="{% static 'images/velin/velin-gradient-logo.png' %}" alt="Velin">
+          {% endif %}
+        </div>
+        <h1>{{ profile.display_name|default:profile.business_name }}</h1>
+        {% if profile.position_title %}<p class="public-card__title">{{ profile.position_title }}</p>{% endif %}
+        {% if profile.business_name %}<p class="public-card__business">{{ profile.business_name }}</p>{% endif %}
+      </div>
+
+      <div class="public-card__actions">
+        {% if profile.contact_email %}<a href="mailto:{{ profile.contact_email }}" class="button button--primary">Email</a>{% endif %}
+        {% if profile.phone_number %}<a href="tel:{{ profile.phone_number }}" class="button button--ghost">Call</a>{% endif %}
+        {% if profile.website_url %}<a href="{{ profile.website_url }}" class="button button--ghost" target="_blank" rel="noreferrer">Website</a>{% endif %}
+      </div>
+
+      {% if profile.bio %}
+        <div class="public-card__section">
+          <h2>About</h2>
+          <p>{{ profile.bio }}</p>
+        </div>
+      {% endif %}
+
+      {% if profile.social_links %}
+        <div class="public-card__section">
+          <h2>Connect</h2>
+          <div class="social-grid">
+            {% for label, url in profile.social_links %}
+              <a href="{{ url }}" target="_blank" rel="noreferrer" class="social-chip">{{ label }}</a>
+            {% endfor %}
+          </div>
+        </div>
+      {% endif %}
+
+      {% if profile.pitch_media %}
+        <div class="public-card__section">
+          <h2>Business Pitch</h2>
+          <a href="{{ profile.pitch_media.url }}" class="button button--ghost" target="_blank" rel="noreferrer">Open Media</a>
+        </div>
+      {% endif %}
+    </article>
+  </section>
+{% endblock %}

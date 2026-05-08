@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Velin | Products{% endblock %}
+
+{% block content %}
+  <section class="products-page shell" data-cascade>
+    <div class="section-heading" data-reveal>
+      <p class="eyebrow">Products</p>
+      <h1>Velin products.</h1>
+      <p>Premium NFC cards designed for cleaner introductions and faster sharing.</p>
+    </div>
+
+    <div class="product-filters" data-reveal>
+      {% for value, label in category_options %}
+        <a href="{% url 'products' %}{% if value != 'all' %}?category={{ value }}{% endif %}" class="filter-pill {% if active_category == value %}is-active{% endif %}">{{ label }}</a>
+      {% endfor %}
+    </div>
+
+    <section class="catalog-grid catalog-grid--products">
+      {% for product in products %}
+        {% include 'core/partials/product_card.html' with product=product %}
+      {% endfor %}
+    </section>
+  </section>
+{% endblock %}

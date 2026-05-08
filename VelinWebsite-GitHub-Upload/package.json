@@ -1,0 +1,12 @@
+{
+  "name": "velinwebsite",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Recovered Velin Django website with restored labelled assets and local helper scripts.",
+  "scripts": {
+    "dev": "cmd /c if not exist .venv py -m venv .venv && .\\.venv\\Scripts\\python.exe -m pip install -r requirements.txt && .\\.venv\\Scripts\\python.exe manage.py migrate && .\\.venv\\Scripts\\python.exe manage.py runserver 127.0.0.1:5173",
+    "consumer": "cmd /c if not exist .venv py -m venv .venv && .\\.venv\\Scripts\\python.exe -m pip install -r requirements.txt && .\\.venv\\Scripts\\python.exe manage.py migrate && .\\.venv\\Scripts\\python.exe manage.py runserver 127.0.0.1:5173",
+    "admin": "cmd /c if not exist .venv py -m venv .venv && .\\.venv\\Scripts\\python.exe -m pip install -r requirements.txt && .\\.venv\\Scripts\\python.exe manage.py migrate && .\\.venv\\Scripts\\python.exe manage.py runserver 127.0.0.1:5174",
+    "build": "cmd /c if not exist .venv py -m venv .venv && .\\.venv\\Scripts\\python.exe -m pip install -r requirements.txt && .\\.venv\\Scripts\\python.exe manage.py check"
+  }
+}

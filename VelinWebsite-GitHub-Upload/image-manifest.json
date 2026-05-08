@@ -1,0 +1,31 @@
+{
+  "project": "VelinWebsite",
+  "final_folder": "C:\\Users\\elama\\Desktop\\VelinWebsite",
+  "main_asset_source": "C:\\Users\\elama\\OneDrive\\Desktop\\velin-assets-labelled-codex-ready\\velin-assets-labelled\\public\\images\\velin",
+  "main_images_used": [
+    "public/images/velin/black-plastic-velin-card.jpg",
+    "public/images/velin/metal-velin-card.jpg",
+    "public/images/velin/wood-velin-card.jpg",
+    "public/images/velin/velin-gradient-logo.png",
+    "public/images/velin/velin-v-card-launch-poster.jpg",
+    "public/images/velin/velin-one-tap-endless-connections-poster.jpg"
+  ],
+  "supplemental_images_used": [
+    "public/images/velin/live-extracted/velin-product-shot-custom-design.png",
+    "public/images/velin/velin-nfc-stand.png"
+  ],
+  "live_base44_extraction": {
+    "status": "partial_success",
+    "saved_to": "public/images/velin/live-extracted",
+    "images_found": [
+      "velin-logo-live-transparent.png",
+      "velin-product-shot-standard-metal.png",
+      "velin-product-shot-wood.png",
+      "velin-product-shot-custom-design.png"
+    ]
+  },
+  "velin_nfc_ring": {
+    "found": false,
+    "notes": "No recoverable Velin NFC ring image was found locally or in the live Base44 bundle."
+  }
+}
